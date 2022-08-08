@@ -1,0 +1,136 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Outage;
+use Illuminate\Http\Request;
+
+class OutageController extends Controller {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+        $outages = Outage::orderBy("created_at", "desc")->get();
+        return view('outages.index', compact('outages'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Outage $outage) {
+        return view('outages.form', compact('outage'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
+        $outage = Outage::create([
+            'type'          => $request->type,
+            'applicant'     => auth()->user()->id,
+            'protection_id' => $request->protection_id,
+            'work'          => $request->work,
+            'from'          => date_create($request->from),
+            'to'            => date_create($request->to),
+            'relayed_by'    => auth()->user()->id,
+            'received_date' => now(),
+            'remarks'       => $request->remarks,
+            'status'        => 'Pending',
+        ]);
+
+        $outage->equipment()->sync($request->input('equipment'));
+
+        $outage->remarksx()->create([
+            'remarks' => auth()->user()->name . ' ~ ' . $request->remarks,
+        ]);
+
+        return redirect()->route('outages.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Outage  $outage
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Outage $outage) {
+        return view('outages.show', compact('outage'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Outage  $outage
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Outage $outage) {
+        return view('outages.form', compact('outage'));
+    }
+
+    public function approve(outage $outage, Request $request) {
+
+        // dd($request);
+
+        if ($request->has('acknowledge')) {
+            $outage->update([
+                'received_by'   => auth()->user()->id,
+                'received_date' => now(),
+                'remarks'       => $request->remarks,
+                'status'        => "Dispatch Received",
+            ]);
+
+            $outage->remarksx()->create([
+                'remarks' => auth()->user()->name . ' ~ ' . $request->remarks,
+            ]);
+        } else if ($request->has('approve')) {
+            $outage->update([
+                'approved_by'   => auth()->user()->id,
+                'approval_date' => now(),
+                'remarks'       => $request->remarks,
+                'status'        => "Planning Approved",
+            ]);
+
+            $outage->remarksx()->create([
+                'remarks' => auth()->user()->name . ' ~ ' . $request->remarks,
+            ]);
+        } else if ($request->has('done')) {
+            $outage->update([
+                'remarks' => $request->remarks,
+                'status'  => "Done",
+            ]);
+
+            $outage->remarksx()->create([
+                'remarks' => auth()->user()->name . ' ~ ' . $request->remarks,
+            ]);
+        }
+        return redirect()->route('outages.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Outage  $outage
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Outage $outage) {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Outage  $outage
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Outage $outage) {
+        //
+    }
+}
