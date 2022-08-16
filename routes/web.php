@@ -19,15 +19,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\OutageController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', [App\Http\Controllers\OutageController::class, 'index'])->name('home');
 
-Route::post('outages/{outage}/approve', [OutageController::class, 'approve'])->name('outages.approve');
+    Route::post('outages/{outage}/approve', [OutageController::class, 'approve'])->name('outages.approve');
 
-// Route::post('outages/{outage}/approval', [OutageController::class, 'approve'])
+    // Route::post('outages/{outage}/approval', [OutageController::class, 'approve'])
 
-Route::resources([
-    'stations'    => StationController::class,
-    'protections' => ProtectionController::class,
-    'equipment'   => EquipmentController::class,
-    'outages'     => OutageController::class,
-]);
+    Route::resources([
+        'stations'    => StationController::class,
+        'protections' => ProtectionController::class,
+        'equipment'   => EquipmentController::class,
+        'outages'     => OutageController::class,
+    ]);
+});

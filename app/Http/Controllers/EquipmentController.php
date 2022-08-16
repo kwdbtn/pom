@@ -32,10 +32,11 @@ class EquipmentController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        Equipment::create([
+        $equipment = Equipment::create([
             'name'   => $request->name,
             'active' => true,
         ]);
+        notify()->success($equipment->name . ' created successfully!');
         return redirect()->route('equipment.index');
     }
 
@@ -70,6 +71,7 @@ class EquipmentController extends Controller {
         $equipment->update([
             'name' => $request->name,
         ]);
+        notify()->success($equipment->name . ' updated successfully!');
         return redirect()->route('equipment.index');
     }
 

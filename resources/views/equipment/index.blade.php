@@ -7,7 +7,7 @@
             <h4 class="card-title"><strong>Equipment</strong>
                 <span class="float-right"><a href="{{ route('equipment.create') }}" class="btn btn-sm btn-dark float-end">Add New</a></span>
             </h4>
-
+            <hr>
             <div class="table-responsive table-striped">
                 <table class="table table-bordered table-myDataTable">
                     <thead class="thead-light">

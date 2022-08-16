@@ -32,10 +32,11 @@ class ProtectionController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        Protection::create([
+        $protection = Protection::create([
             'name'   => $request->name,
             'active' => true,
         ]);
+        notify()->success($protection->name . ' created successfully!');
         return redirect()->route('protections.index');
     }
 
@@ -70,6 +71,7 @@ class ProtectionController extends Controller {
         $protection->update([
             'name' => $request->name,
         ]);
+        notify()->success($protection->name . ' updated successfully!');
         return redirect()->route('protections.index');
     }
 

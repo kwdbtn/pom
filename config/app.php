@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\ComposerServiceProvider::class,
+        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
 
     ],
 

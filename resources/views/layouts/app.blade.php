@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    @notifyCss
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -91,5 +93,8 @@
 
     @include('partials.init_script')
     @stack('scripts')
+   
+    <x:notify-messages />
+    @notifyJs
 </body>
 </html>

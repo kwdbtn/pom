@@ -51,6 +51,8 @@ class OutageController extends Controller {
             'remarks' => auth()->user()->name . ' ~ ' . $request->remarks,
         ]);
 
+        notify()->success('Application submitted successfully!');
+
         return redirect()->route('outages.index');
     }
 

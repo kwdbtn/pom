@@ -21,9 +21,9 @@
                     <div class="card mt-0">
                         <div class="card-body">
                             <div class="form-group row">
-                                {!! Form::label('description', 'Applicant:', ['class' => 'control-label col-sm-3']) !!}
+                                {!! Form::label('applicant', 'Applicant:', ['class' => 'control-label col-sm-3']) !!}
                                 <div class="col-sm-9">
-                                    <h6>{!! Form::label('description', $outage->applicantx()->name, ['class'=>'control-label
+                                    <h6>{!! Form::label('applicant', $outage->applicant, ['class'=>'control-label
                                         col-md-12
                                         col-xs-12'])
                                         !!}</h6>

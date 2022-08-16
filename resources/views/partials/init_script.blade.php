@@ -34,7 +34,7 @@
     $(function () {
         $('#datetimepicker7').datetimepicker();
         $('#datetimepicker8').datetimepicker({
-            useCurrent: false;
+            useCurrent: false
         });
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
