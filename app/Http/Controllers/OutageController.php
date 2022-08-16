@@ -34,7 +34,7 @@ class OutageController extends Controller {
     public function store(Request $request) {
         $outage = Outage::create([
             'type'          => $request->type,
-            'applicant'     => auth()->user()->id,
+            'applicant'     => $request->applicant,
             'protection_id' => $request->protection_id,
             'work'          => $request->work,
             'from'          => date_create($request->from),

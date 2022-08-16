@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::create('outages', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->integer('applicant')->unsigned();
+            $table->string('applicant');
             $table->integer('protection_id')->unsigned();
             $table->string('work');
             $table->dateTime('from');

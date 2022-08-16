@@ -25,41 +25,44 @@
                         'class' => 'form-horizontal'])
                         !!}
                         <div class="form-group row">
-                            {!! Form::label('type', 'Type:', ['class' => 'control-label col-sm-2 text-right']) !!}
+                        {!! Form::label('applicant', 'Applicant:', ['class' => 'control-label col-sm-2 text-end'])
+                        !!}
+                        <div class="col-sm-12 col-md-10">
+                            {!! Form::text('applicant', null,['class'=>'form-control col-md-7 col-xs-8
+                            ','placeholder'=>'Applicant', 'required']) !!}
+                        </div>
+                    </div>
+                        
+                        <div class="form-group row mt-1">
+                            {!! Form::label('type', 'Type:', ['class' => 'control-label col-sm-2 text-end']) !!}
                             <div class="col-sm-10">
                                 {{Form::select('type', $types, null, ['class' => 'form-control col-md-12 col-xs-12'])}}
                             </div>
                         </div>
 
                         <div class="form-group row mt-1">
-                            {!! Form::label('equipment_id', 'Equipment:', ['class' => 'control-label col-sm-2 text-right']) !!}
+                            {!! Form::label('equipment_id', 'Equipment:', ['class' => 'control-label col-sm-2 text-end']) !!}
                             <div class="col-sm-10">
-                                {!!
-                            Form::select('equipment[]',$arr['equipment'],isset($applicant->equipment) ?
-                            $applicant->equipment->pluck('id')->toArray() : null,['class'=>'form-control
-                            col-md-12 col-xs-12
-                            select2',
-                            'multiple'])
-                            !!}
+                            {!! Form::select('equipment[]',$arr['equipment'],isset($applicant->equipment) ? $applicant->equipment->pluck('id')->toArray() : null,['class'=>'form-control col-md-12 col-xs-12 select2', 'multiple']) !!}
                             </div>
                         </div>
 
                         <div class="form-group row mt-1">
-                            {!! Form::label('protection_id', 'Protection:', ['class' => 'control-label col-sm-2 text-right']) !!}
+                            {!! Form::label('protection_id', 'Protection:', ['class' => 'control-label col-sm-2 text-end']) !!}
                             <div class="col-sm-10">
-                                {{Form::select('protection_id', $arr['protections'], null, ['class' => 'form-control col-md-12 col-xs-12'])}}
+                                {{Form::select('protection_id', $arr['protections'], null, ['class' => 'form-control col-md-10 col-xs-10'])}}
                             </div>
                         </div>
 
                         <div class="form-group row mt-1">
-                            {!! Form::label('work', 'Work to be done:', ['class' => 'control-label col-sm-2 text-right']) !!}
+                            {!! Form::label('work', 'Work to be done:', ['class' => 'control-label col-sm-2 text-end']) !!}
                             <div class="col-sm-10">
                                 {!! Form::textArea('work', null, ['class'=>'form-control col-md-12 col-xs-12','placeholder'=>'Work to be done...', 'rows' => '3']) !!}
                             </div>
                         </div>
 
                         <div class="form-group row mt-1">
-                            {!! Form::label('from', 'From:', ['class' => 'control-label col-sm-2 text-right']) !!}
+                            {!! Form::label('from', 'From:', ['class' => 'control-label col-sm-2 text-end']) !!}
                         <div class="col-sm-10">
                             <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
                                 {!! Form::text('from', null, ['class'=>'form-control datetimepicker-input col-md-12 col-xs-12','placeholder'=>'Start Date', 'data-target'=>'#datetimepicker7', 'required']) !!}
@@ -71,7 +74,7 @@
                         </div>
 
                         <div class="form-group row mt-1">
-                        {!! Form::label('to', 'To:', ['class' => 'control-label col-sm-2 text-right']) !!}
+                        {!! Form::label('to', 'To:', ['class' => 'control-label col-sm-2 text-end']) !!}
                         <div class="col-sm-10">
                             <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
                                 {!! Form::text('to', null, ['class'=>'form-control datetimepicker-input col-md-12 col-xs-12','placeholder'=>'End Date', 'data-target'=>'#datetimepicker8', 'required']) !!}
@@ -91,7 +94,7 @@
                     </div> --}}
 
                     <div class="form-group row mt-1">
-                            {!! Form::label('remarks', 'Remarks:', ['class' => 'control-label col-sm-2 text-right']) !!}
+                            {!! Form::label('remarks', 'Remarks:', ['class' => 'control-label col-sm-2 text-end']) !!}
                             <div class="col-sm-10">
                                 {!! Form::textArea('remarks', null, ['class'=>'form-control col-md-12 col-xs-12','placeholder'=>'Remarks...', 'rows' => '3']) !!}
                             </div>

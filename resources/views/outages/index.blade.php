@@ -33,7 +33,7 @@
                             <tr scope="row">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $outage->type }}</td>
-                                <td>{{ $outage->applicantx()->name }}</td>
+                                <td>{{ $outage->applicant }}</td>
                                 <td>
                                     @foreach ($outage->equipment as $equipment)
                                         <span class="badge bg-primary">{{ $equipment->name }}</span>
