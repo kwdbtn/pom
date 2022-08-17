@@ -7,7 +7,7 @@
             <h4 class="card-title"><strong>Outages</strong>
                 <span class="float-right"><a href="{{ route('outages.create') }}" class="btn btn-sm btn-dark float-end">Add New</a></span>
             </h4>
-
+            <hr>
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered table-myDataTable">
                     <thead class="thead-light">
