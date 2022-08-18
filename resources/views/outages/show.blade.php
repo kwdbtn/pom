@@ -159,54 +159,60 @@
             </div>
 
             <div class="col-md-4">
-                    <div class="card mt-0">
-                        <div class="card-body">
-                            <h6>All Remarks</h6>
-                            <hr>
-                            @foreach ($outage->remarksx as $remark)
-                                <label for="remark">{{ $remark->remarks }} - <small>{{ $remark->created_at }}</small></label> <br>
-                            @endforeach
-                        </div>
+                <div class="card mt-0">
+                    <div class="card-body">
+                        <h6>All Remarks</h6>
+                        <hr>
+                        @foreach ($outage->remarksx as $remark)
+                            <label for="remark">{{ $remark->remarks }} - <small>{{ $remark->created_at }}</small></label> <br>
+                        @endforeach
                     </div>
                 </div>
+            </div>
 
-                @if (auth()->user()->user_group->name != "Operators")
+                @role('Dispatch|Planning')
             <div class="pr-0 mt-2">
                 <div class="card mt-0">
                     <div class="card-body">
                         @if($outage->status == "Pending" || $outage->status == "Dispatch Received" || $outage->status = "Planning Approved")
                         <form action="{{ route('outages.approve', $outage) }}" method="POST">
                             @csrf
+                            
                             {!! Form::label('remarks', 'Remarks:', ['class' => 'control-label col-sm-3']) !!}
                             <textarea name="remarks" id="" cols="30" rows="4" class="form-control"></textarea>
 
                             @if ($outage->status == "Pending")
-                                @if (auth()->user()->user_group->name == "Dispatch")
+                                @role('Dispatch')
                                     <Button type="submit" name="acknowledge" class="btn btn-sm btn-dark mt-1">Acknowledge</Button>
-                                @endif
+                                @endrole
 
-                                @if (auth()->user()->user_group->name == "Planning")
+                                @role('Planning')
                                     <Button type="submit" name="approve" class="btn btn-sm btn-dark mt-1">Approve</Button>
-                                @endif
+                                    <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
+                                @endrole
                             @endif
 
                             @if ($outage->status == "Dispatch Received")
-                                @if (auth()->user()->user_group->name == "Planning")
+                                @role('Planning')
                                     <Button type="submit" name="approve" class="btn btn-sm btn-dark mt-1">Approve</Button>
-                                @endif
+                                    <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
+                                @endrole
+                                @role('Dispatch')
+                                    <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
+                                @endrole
                             @endif
 
                             @if ($outage->status == "Planning Approved")
-                                @if (auth()->user()->user_group->name == "Planning")
+                                @role('Planning')
                                     <Button type="submit" name="done" class="btn btn-sm btn-dark mt-1">Done</Button>
-                                @endif
+                                @endrole
                             @endif
                         </form>
                         @endif
                     </div>
                 </div>
             </div>
-            @endif
+            @endrole
         </div>
     </div>
 </div>

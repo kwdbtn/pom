@@ -55,5 +55,14 @@ class ComposerServiceProvider extends ServiceProvider {
 
             $view->with('arr', $arr);
         });
+
+        view()->composer('usergroups.form', function ($view) {
+
+            $arr = [
+                'users' => User::pluck('name', 'id'),
+            ];
+
+            $view->with('arr', $arr);
+        });
     }
 }

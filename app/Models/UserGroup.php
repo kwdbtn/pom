@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserGroup extends Model {
     use HasFactory;
 
+    protected $fillable = ['name', 'active'];
+
     public function users() {
         return $this->hasMany(User::class);
     }

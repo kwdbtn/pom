@@ -4,6 +4,7 @@ use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\OutageController;
 use App\Http\Controllers\ProtectionController;
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\UserGroupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,6 @@ Route::group(['middleware' => ['auth']], function () {
         'protections' => ProtectionController::class,
         'equipment'   => EquipmentController::class,
         'outages'     => OutageController::class,
+        'usergroups'  => UserGroupController::class,
     ]);
 });

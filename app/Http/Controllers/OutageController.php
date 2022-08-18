@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Outage;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OutageController extends Controller {
@@ -97,6 +98,14 @@ class OutageController extends Controller {
                 'approval_date' => now(),
                 'remarks'       => $request->remarks,
                 'status'        => "Planning Approved",
+            ]);
+
+            $outage->remarksx()->create([
+                'remarks' => auth()->user()->name . ' ~ ' . $request->remarks,
+            ]);
+        } else if ($request->has('comment')) {
+            $outage->update([
+                'remarks' => $request->remarks,
             ]);
 
             $outage->remarksx()->create([

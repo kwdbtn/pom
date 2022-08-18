@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
-class UserGroupController extends Controller
-{
+class UserGroupController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $usergroups = Role::all();
+        return view('usergroups.index', compact('usergroups'));
     }
 
     /**
@@ -22,9 +23,8 @@ class UserGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Role $usergroup) {
+        return view('usergroups.form', compact('usergroup'));
     }
 
     /**
@@ -33,9 +33,14 @@ class UserGroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $usergroup = UserGroup::create([
+            'name' => $request->name,
+        ]);
+
+        $usergroup->users()->sync($request->input('users'));
+
+        return redirect()->route('usergroups.index');
     }
 
     /**
@@ -44,8 +49,7 @@ class UserGroupController extends Controller
      * @param  \App\Models\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function show(UserGroup $userGroup)
-    {
+    public function show(UserGroup $userGroup) {
         //
     }
 
@@ -55,9 +59,8 @@ class UserGroupController extends Controller
      * @param  \App\Models\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserGroup $userGroup)
-    {
-        //
+    public function edit(Role $usergroup) {
+        return view('usergroups.form', compact('usergroup'));
     }
 
     /**
@@ -67,9 +70,15 @@ class UserGroupController extends Controller
      * @param  \App\Models\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserGroup $userGroup)
-    {
-        //
+    public function update(Request $request, Role $usergroup) {
+        $user = User::find($request->user);
+        $role = $usergroup->name;
+
+        $user->assignRole($role);
+
+        notify()->success('User assigned to group successfully!');
+
+        return redirect()->route('usergroups.index');
     }
 
     /**
@@ -78,8 +87,7 @@ class UserGroupController extends Controller
      * @param  \App\Models\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserGroup $userGroup)
-    {
+    public function destroy(UserGroup $userGroup) {
         //
     }
 }

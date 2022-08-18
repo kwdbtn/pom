@@ -9,7 +9,7 @@
             </h4>
             <hr>
             <div class="table-responsive">
-                <table class="table table-striped table-hover table-bordered table-myDataTable">
+                <table class="table table-striped table-hover table-bordered table-myDataTable table-report">
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
