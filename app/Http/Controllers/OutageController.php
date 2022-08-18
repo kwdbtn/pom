@@ -64,6 +64,10 @@ class OutageController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Outage $outage) {
+        activity()
+            ->performedOn($outage)
+            ->event('viewed')
+            ->log('User viewed the application');
         return view('outages.show', compact('outage'));
     }
 

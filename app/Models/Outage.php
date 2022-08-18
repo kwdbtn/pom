@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Outage extends Model {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'type', 'applicant', 'protection_id', 'work', 'from', 'to', 'relayed_by', 'received_by', 'received_date', 'approved_by', 'approval_date', 'remarks', 'status', 'done',
@@ -46,5 +48,13 @@ class Outage extends Model {
 
     public function remarksx() {
         return $this->hasMany(Remark::class);
+    }
+
+    public function getActivitylogOptions(): LogOptions {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->useLogName('user');
     }
 }
