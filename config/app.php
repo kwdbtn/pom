@@ -197,6 +197,7 @@ return [
 
         App\Providers\ComposerServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        Adldap\Laravel\AdldapServiceProvider::class,
 
     ],
 
@@ -213,6 +214,7 @@ return [
 
     'aliases'         => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Adldap' => Adldap\Laravel\Facades\Adldap::class,
     ])->toArray(),
 
 ];
