@@ -40,6 +40,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('outages*') ? 'active' : '' }}" href="{{ route('outages.index') }}">Outages</a>
                         </li>
+                        @role('Planning')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('equipment*') ? 'active' : '' }}" href="{{ route('equipment.index') }}">Equipment</a>
                         </li>
@@ -49,6 +50,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('usergroups*') ? 'active' : '' }}" href="{{ route('usergroups.index') }}">User Groups</a>
                         </li>
+                        @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
