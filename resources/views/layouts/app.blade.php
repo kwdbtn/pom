@@ -10,10 +10,13 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     @notifyCss
+    <link rel="stylesheet" href="{{ asset('css/app.css')}}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css" integrity="sha384-X8QTME3FCg1DLb58++lPvsjbQoCT9bp3MsUU3grbIny/3ZwUJkRNO8NPW6zqzuW9" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
@@ -39,7 +42,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('outages*') || request()->is('/') ? 'active' : '' }}" href="{{ route('outages.index') }}">Outages</a>
+                            <a class="nav-link {{ request()->is('dashboard*') || request()->is('/') ? 'active' : '' }}" href="{{ route('dashboard.index') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('outages*') ? 'active' : '' }}" href="{{ route('outages.index') }}">Outages</a>
                         </li>
                         @role('Planning')
                         <li class="nav-item">

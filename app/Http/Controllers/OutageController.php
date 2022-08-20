@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Outage;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OutageController extends Controller {
@@ -15,6 +16,12 @@ class OutageController extends Controller {
     public function index() {
         $outages = Outage::orderBy("created_at", "desc")->get();
         return view('outages.index', compact('outages'));
+    }
+
+    public function outages($status) {
+        $outages = Outage::where('status', $status)->orderBy("created_at", "desc")->get();
+        $stat = $status == 'Pending' ? 'Pending' : 'Completed';
+        return view('outages.status', compact('outages', 'stat'));
     }
 
     /**
@@ -38,8 +45,8 @@ class OutageController extends Controller {
             'applicant'     => $request->applicant,
             'protection_id' => $request->protection_id,
             'work'          => $request->work,
-            'from'          => date_create($request->from),
-            'to'            => date_create($request->to),
+            'from'          => date('Y-m-d H:i:s', strtotime($request->from)),
+            'to'            => date('Y-m-d H:i:s', strtotime($request->to)),
             'relayed_by'    => auth()->user()->id,
             'received_date' => now(),
             'remarks'       => $request->remarks,

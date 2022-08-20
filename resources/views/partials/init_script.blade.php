@@ -15,6 +15,8 @@
 <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" defer></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js" defer></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"  charset=utf-8 defer></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
 <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js">
@@ -36,11 +38,13 @@
 
     $(function () {
         $('#datetimepicker7').datetimepicker({
-            format: 'DD/MM/YYYY, HH:mm',
+            // format: 'DD/MM/YYYY, HH:mm',
+            format: 'DD-MM-YYYY, H:mm:s',
         });
         $('#datetimepicker8').datetimepicker({
             useCurrent: false,
-            format: 'DD/MM/YYYY, HH:mm',
+            format: 'DD-MM-YYYY, HH:mm:s',
+            // format: 'YYYY/DD/MM HH:mm',
         });
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
