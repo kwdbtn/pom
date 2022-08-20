@@ -65,7 +65,7 @@
                             {!! Form::label('from', 'From:', ['class' => 'control-label col-sm-2 text-end']) !!}
                         <div class="col-sm-10">
                             <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-                                {!! Form::text('from', null, ['class'=>'form-control datetimepicker-input col-md-12 col-xs-12','placeholder'=>'Start Date', 'data-target'=>'#datetimepicker7', 'required']) !!}
+                                {!! Form::text('from', null, ['class'=>'form-control datetimepicker-input col-md-12 col-xs-12','placeholder'=>'Start Date', 'data-target'=>'#datetimepicker7', 'data-toggle'=>"datetimepicker", 'required']) !!}
                                 <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
                                     <div class="input-group-text form-control"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -77,21 +77,13 @@
                         {!! Form::label('to', 'To:', ['class' => 'control-label col-sm-2 text-end']) !!}
                         <div class="col-sm-10">
                             <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
-                                {!! Form::text('to', null, ['class'=>'form-control datetimepicker-input col-md-12 col-xs-12','placeholder'=>'End Date', 'data-target'=>'#datetimepicker8', 'required']) !!}
+                                {!! Form::text('to', null, ['class'=>'form-control datetimepicker-input col-md-12 col-xs-12','placeholder'=>'End Date', 'data-target'=>'#datetimepicker8', 'data-toggle'=>"datetimepicker", 'required']) !!}
                                 <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
                         </div>
                         </div>
-                    
-
-                    {{-- <div class="form-group row mt-1">
-                            {!! Form::label('relayed_by', 'Relayed By:', ['class' => 'control-label col-sm-2 text-right']) !!}
-                            <div class="col-sm-10">
-                                {{Form::select('relayed_by', $arr['relayed_by'], null, ['class' => 'form-control col-md-12 col-xs-12'])}}
-                            </div>
-                    </div> --}}
 
                     <div class="form-group row mt-1">
                             {!! Form::label('remarks', 'Remarks:', ['class' => 'control-label col-sm-2 text-end']) !!}

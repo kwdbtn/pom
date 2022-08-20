@@ -27,6 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <img src="{{ asset('img/favicon.png') }}" alt="" width="28" height="28" class="d-inline-block align-text-top">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -38,7 +39,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('outages*') ? 'active' : '' }}" href="{{ route('outages.index') }}">Outages</a>
+                            <a class="nav-link {{ request()->is('outages*') || request()->is('/') ? 'active' : '' }}" href="{{ route('outages.index') }}">Outages</a>
                         </li>
                         @role('Planning')
                         <li class="nav-item">
@@ -65,7 +66,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    {{-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> --}}
                                 </li>
                             @endif
                         @else
