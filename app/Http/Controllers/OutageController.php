@@ -74,7 +74,7 @@ class OutageController extends Controller {
         activity()
             ->performedOn($outage)
             ->event('viewed')
-            ->log('User viewed the application');
+            ->log('viewed');
         return view('outages.show', compact('outage'));
     }
 
