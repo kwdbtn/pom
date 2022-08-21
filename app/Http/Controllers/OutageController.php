@@ -143,7 +143,28 @@ class OutageController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Outage $outage) {
-        //
+        $outage->update([
+            'type'          => $request->type,
+            'applicant'     => $request->applicant,
+            'protection_id' => $request->protection_id,
+            'work'          => $request->work,
+            'from'          => date('Y-m-d H:i:s', strtotime($request->from)),
+            'to'            => date('Y-m-d H:i:s', strtotime($request->to)),
+            'relayed_by'    => auth()->user()->id,
+            'received_date' => now(),
+            'remarks'       => $request->remarks,
+            'status'        => 'Pending',
+        ]);
+
+        $outage->equipment()->sync($request->input('equipment'));
+
+        $outage->remarksx()->create([
+            'remarks' => auth()->user()->name . ' ~ (edited)' . $request->remarks,
+        ]);
+
+        notify()->success('Application updated successfully!');
+
+        return redirect()->route('outages.show', compact('outage'));
     }
 
     /**

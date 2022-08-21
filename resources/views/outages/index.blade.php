@@ -24,7 +24,7 @@
                                 <th scope="col">Approved</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Remarks</th>
-                                <th scope="col"> </th>
+                                <th scope="col">***</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +52,13 @@
                                         <a href="{{ route('outages.show', $outage) }}"
                                             class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Show"><i
                                                 class="fa fa-eye"></i></a>
+                                        @role('Planning')
+                                            @if ($outage->status == "Pending" || $outage->status == "Dispatch Received")
+                                                <a href="{{ route('outages.edit', $outage) }}"
+                                                class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><i
+                                                    class="fa fa-pencil"></i></a>
+                                            @endif
+                                        @endrole
                                     </div>
                                 </td>
                             </tr>

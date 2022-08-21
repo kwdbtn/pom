@@ -8,9 +8,14 @@
                 <div class="card-body pb-2">
                     <h6>
                         <strong><span style="color: red">|</span>Application for Protection Guarantee</strong>
-                        <span>
-                            <a href="{{ route('outages.index') }}" class="btn btn-sm btn-dark float-end">Back</a>
-                        </span>
+                        <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
+                            @role('Planning')
+                                @if ($outage->status == "Pending" || $outage->status == "Dispatch Received")
+                                    <a href="{{ route('outages.edit', $outage) }}" class="btn btn-sm btn-warning">Edit</a>
+                                @endif
+                            @endrole
+                            <a href="{{ route('outages.index') }}" class="btn btn-sm btn-dark">Back</a>
+                          </div>
                     </h6>
                     <small>{{ $outage->status }}</small>
                 </div>
@@ -83,7 +88,7 @@
                             <div class="form-group row">
                                 {!! Form::label('to', 'To:', ['class' => 'control-label col-sm-3']) !!}
                                 <div class="col-sm-9">
-                                    <h6>{!! Form::label('to', $outage->from, ['class'=>'control-label
+                                    <h6>{!! Form::label('to', $outage->to, ['class'=>'control-label
                                         col-md-12
                                         col-xs-12'])
                                         !!}
@@ -205,6 +210,7 @@
                             @if ($outage->status == "Planning Approved")
                                 @role('Planning')
                                     <Button type="submit" name="done" class="btn btn-sm btn-dark mt-1">Done</Button>
+                                    <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
                                 @endrole
                             @endif
                         </form>

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4>
-                        <strong>{{ $outage->exists ? "Editing '".$outage->name."'" : "Application for Protection Guarantee" }}</strong>
+                        <strong>{{ $outage->exists ? "Editing Application" : "Application for Protection Guarantee" }}</strong>
                         <span>
                             <a href="{{ route('outages.index') }}" class="btn btn-sm btn-dark float-end">Back</a>
                         </span>
