@@ -7,7 +7,6 @@ use App\Charts\OutageFrequencyChart;
 use App\Charts\OutageStatusChart;
 use App\Models\Dashboard;
 use App\Models\Outage;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -39,7 +38,7 @@ class DashboardController extends Controller {
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
                 'rgb(255, 205, 86)',
-                'rgb(38, 194, 129)'
+                'rgb(38, 194, 129)',
             ]);
 
         $outages = Outage::all();
@@ -71,7 +70,7 @@ class DashboardController extends Controller {
 
         $outagefreqchart = new OutageFrequencyChart;
         $outagefreqchart->labels($last_outages->keys());
-        $outagefreqchart->dataset('Last 10 Outages', 'line', $last_outages->values())
+        $outagefreqchart->dataset('Applicants', 'line', $last_outages->values())
             ->backgroundColor(
                 'rgb(255, 99, 132)',
             );
