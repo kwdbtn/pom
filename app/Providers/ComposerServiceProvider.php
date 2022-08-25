@@ -28,7 +28,7 @@ class ComposerServiceProvider extends ServiceProvider {
 
             $types = [
                 'Emergency' => 'Emergency',
-                'Planned'   => 'Planned',
+                'Planned' => 'Planned',
             ];
 
             $view->with('types', $types);
@@ -37,9 +37,9 @@ class ComposerServiceProvider extends ServiceProvider {
         view()->composer('outages.form', function ($view) {
 
             $arr = [
-                'equipment'   => Equipment::pluck('name', 'id'),
+                'equipment' => Equipment::pluck('name', 'id'),
                 'protections' => Protection::pluck('name', 'id'),
-                'relayed_by'  => User::pluck('name', 'id'),
+                'relayed_by' => User::pluck('name', 'id'),
             ];
 
             $view->with('arr', $arr);
@@ -48,8 +48,8 @@ class ComposerServiceProvider extends ServiceProvider {
         view()->composer('home', function ($view) {
 
             $arr = [
-                'outages'  => Outage::count(),
-                'pending'  => Outage::where('status', 'Pending')->count(),
+                'outages' => Outage::count(),
+                'pending' => Outage::where('status', 'Pending')->count(),
                 'approved' => Outage::where('status', 'Approved')->count(),
             ];
 
@@ -59,7 +59,7 @@ class ComposerServiceProvider extends ServiceProvider {
         view()->composer('usergroups.form', function ($view) {
 
             $arr = [
-                'users' => User::pluck('name', 'id'),
+                'users' => User::orderBy('name', 'asc')->pluck('name', 'id'),
             ];
 
             $view->with('arr', $arr);
