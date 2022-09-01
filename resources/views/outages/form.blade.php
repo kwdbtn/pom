@@ -85,6 +85,15 @@
                         </div>
                         </div>
 
+                        <div class="form-group row mt-1">
+                            {!! Form::label('relayed__by', 'Relayed by:', ['class' => 'control-label col-sm-2 text-end'])
+                            !!}
+                            <div class="col-sm-12 col-md-10">
+                                {!! Form::text('relayed_by', null,['class'=>'form-control col-md-7 col-xs-8
+                                ','placeholder'=>'Relayed By', 'required']) !!}
+                            </div>
+                        </div>
+
                     <div class="form-group row mt-1">
                             {!! Form::label('remarks', 'Remarks:', ['class' => 'control-label col-sm-2 text-end']) !!}
                             <div class="col-sm-10">

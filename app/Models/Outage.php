@@ -26,9 +26,9 @@ class Outage extends Model {
         return $this->belongsTo(Protection::class);
     }
 
-    public function relayed_byx() {
-        return User::find($this->relayed_by);
-    }
+    // public function relayed_byx() {
+    //     return User::find($this->relayed_by);
+    // }
 
     public function received_byx() {
         $user = User::find($this->received_by);

@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('work');
             $table->dateTime('from');
             $table->dateTime('to');
-            $table->integer('relayed_by')->unsigned();
+            $table->string('relayed_by');
             $table->integer('received_by')->unsigned()->nullable();
             $table->dateTime('received_date')->nullable();
             $table->integer('approved_by')->unsigned()->nullable();

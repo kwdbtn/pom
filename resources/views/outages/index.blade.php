@@ -19,7 +19,7 @@
                                 <th scope="col">Protection</th>
                                 <th scope="col">From</th>
                                 <th scope="col">To</th>
-                                <th scope="col">Relayed</th>
+                                <th scope="col">Relayed By</th>
                                 <th scope="col">Received</th>
                                 <th scope="col">Approved</th>
                                 <th scope="col">Status</th>
@@ -42,7 +42,7 @@
                                 <td>{{ $outage->protection->name }}</td>
                                 <td>{{ $outage->from }}</td>
                                 <td>{{ $outage->to }}</td>
-                                <td>{{ $outage->relayed_byx()->name }}</td>
+                                <td>{{ $outage->relayed_by }}</td>
                                 <td>{{ $outage->received_byx() == "-" ? "-" : $outage->received_byx()->name . ' - '. $outage->created_at }}</td>
                                 <td>{{ $outage->approved_byx() == "-" ? "-" : $outage->approved_byx()->name . ' - '. $outage->approval_date}}</td>
                                 <td>{{ $outage->status }}</td>

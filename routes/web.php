@@ -22,28 +22,28 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // Restricted from people with no roles
-Route::group(['middleware' => ['auth', 'role:Operator|Dispatch|Planning|SuperAdmin']], function () {
+Route::group(['middleware' => ['auth', 'role:Operator|Dispatch|Planning|Manager|SuperAdmin']], function () {
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 
-    Route::post('outages/{outage}/approve', [OutageController::class, 'approve'])->name('outages.approve')->middleware('role:Planning');
-
-    // Route::post('outages/{outage}/approval', [OutageController::class, 'approve'])
+    Route::post('outages/{outage}/approve', [OutageController::class, 'approve'])->name('outages.approve')->middleware('role:Planning|Dispatch|Manager|SuperAdmin');
+//
+    Route::post('outages/{outage}/approval', [OutageController::class, 'approve']);
 
     Route::get('outages/{status}/status', [OutageController::class, 'outages'])->name('outages.outages');
 
-    // For Planning staff only
-    Route::group(['middleware' => ['role:Planning']], function () {
+// For Planning staff only
+    Route::group(['middleware' => ['role:Planning|Manager|SuperAdmin']], function () {
         Route::resources([
-            'stations'    => StationController::class,
+            'stations' => StationController::class,
             'protections' => ProtectionController::class,
-            'equipment'   => EquipmentController::class,
-            'usergroups'  => UserGroupController::class,
+            'usergroups' => UserGroupController::class,
         ]);
     });
 
-    // For everybody
+// For everybody
     Route::resources([
-        'outages'     => OutageController::class,
-        'dashboard'   => DashboardController::class
+        'outages' => OutageController::class,
+        'dashboard' => DashboardController::class,
+        'equipment' => EquipmentController::class,
     ]);
 });

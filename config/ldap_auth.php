@@ -11,7 +11,7 @@ return [
     |
     | You must specify connections in your `config/ldap.php` configuration file.
     |
-    */
+     */
 
     'connection' => env('LDAP_CONNECTION', 'default'),
 
@@ -31,7 +31,7 @@ return [
     |
     | Adldap\Laravel\Auth\NoDatabaseUserProvider::class
     |
-    */
+     */
 
     'provider' => Adldap\Laravel\Auth\DatabaseUserProvider::class,
 
@@ -44,7 +44,7 @@ return [
     |
     | This option is only applicable to the DatabaseUserProvider.
     |
-    */
+     */
 
     'model' => App\Models\User::class,
 
@@ -61,7 +61,7 @@ return [
     |
     |   Adldap\Laravel\Validation\Rules\Rule
     |
-    */
+     */
 
     'rules' => [
 
@@ -87,7 +87,7 @@ return [
     |
     |   Adldap\Laravel\Scopes\ScopeInterface
     |
-    */
+     */
 
     'scopes' => [
 
@@ -129,7 +129,7 @@ return [
         |
         |   This is usually their distinguished name.
         |
-        */
+         */
 
         'ldap' => [
 
@@ -152,7 +152,7 @@ return [
             |
             | This option is only applicable to the DatabaseUserProvider.
             |
-            */
+             */
 
             'guid_column' => 'objectguid',
 
@@ -169,7 +169,7 @@ return [
             |
             | This option is only applicable to the DatabaseUserProvider.
             |
-            */
+             */
 
             'username_column' => 'email',
 
@@ -199,7 +199,7 @@ return [
         |
         |    For example, $_SERVER['AUTH_USER'].
         |
-        */
+         */
 
         'windows' => [
 
@@ -231,7 +231,7 @@ return [
         |
         | This option is only applicable to the DatabaseUserProvider.
         |
-        */
+         */
 
         'sync' => env('LDAP_PASSWORD_SYNC', false),
 
@@ -247,7 +247,7 @@ return [
         |
         | This option is only applicable to the DatabaseUserProvider.
         |
-        */
+         */
 
         'column' => 'password',
 
@@ -265,7 +265,7 @@ return [
     |
     | This option is only applicable to the DatabaseUserProvider.
     |
-    */
+     */
 
     'login_fallback' => env('LDAP_LOGIN_FALLBACK', false),
 
@@ -285,7 +285,7 @@ return [
     |
     | This option is only applicable to the DatabaseUserProvider.
     |
-    */
+     */
 
     'sync_attributes' => [
 
@@ -313,7 +313,7 @@ return [
     | You can freely remove any events you would not like to log below,
     | as well as use your own listeners if you would prefer.
     |
-    */
+     */
 
     'logging' => [
 
@@ -321,16 +321,16 @@ return [
 
         'events' => [
 
-            \Adldap\Laravel\Events\Importing::class                 => \Adldap\Laravel\Listeners\LogImport::class,
-            \Adldap\Laravel\Events\Synchronized::class              => \Adldap\Laravel\Listeners\LogSynchronized::class,
-            \Adldap\Laravel\Events\Synchronizing::class             => \Adldap\Laravel\Listeners\LogSynchronizing::class,
-            \Adldap\Laravel\Events\Authenticated::class             => \Adldap\Laravel\Listeners\LogAuthenticated::class,
-            \Adldap\Laravel\Events\Authenticating::class            => \Adldap\Laravel\Listeners\LogAuthentication::class,
-            \Adldap\Laravel\Events\AuthenticationFailed::class      => \Adldap\Laravel\Listeners\LogAuthenticationFailure::class,
-            \Adldap\Laravel\Events\AuthenticationRejected::class    => \Adldap\Laravel\Listeners\LogAuthenticationRejection::class,
-            \Adldap\Laravel\Events\AuthenticationSuccessful::class  => \Adldap\Laravel\Listeners\LogAuthenticationSuccess::class,
+            \Adldap\Laravel\Events\Importing::class => \Adldap\Laravel\Listeners\LogImport::class,
+            \Adldap\Laravel\Events\Synchronized::class => \Adldap\Laravel\Listeners\LogSynchronized::class,
+            \Adldap\Laravel\Events\Synchronizing::class => \Adldap\Laravel\Listeners\LogSynchronizing::class,
+            \Adldap\Laravel\Events\Authenticated::class => \Adldap\Laravel\Listeners\LogAuthenticated::class,
+            \Adldap\Laravel\Events\Authenticating::class => \Adldap\Laravel\Listeners\LogAuthentication::class,
+            \Adldap\Laravel\Events\AuthenticationFailed::class => \Adldap\Laravel\Listeners\LogAuthenticationFailure::class,
+            \Adldap\Laravel\Events\AuthenticationRejected::class => \Adldap\Laravel\Listeners\LogAuthenticationRejection::class,
+            \Adldap\Laravel\Events\AuthenticationSuccessful::class => \Adldap\Laravel\Listeners\LogAuthenticationSuccess::class,
             \Adldap\Laravel\Events\DiscoveredWithCredentials::class => \Adldap\Laravel\Listeners\LogDiscovery::class,
-            \Adldap\Laravel\Events\AuthenticatedWithWindows::class  => \Adldap\Laravel\Listeners\LogWindowsAuth::class,
+            \Adldap\Laravel\Events\AuthenticatedWithWindows::class => \Adldap\Laravel\Listeners\LogWindowsAuth::class,
             \Adldap\Laravel\Events\AuthenticatedModelTrashed::class => \Adldap\Laravel\Listeners\LogTrashedModel::class,
 
         ],

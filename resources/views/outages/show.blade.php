@@ -9,7 +9,7 @@
                     <h6>
                         <strong><span style="color: red">|</span>Application for Protection Guarantee</strong>
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                            @role('Planning')
+                            @role('Planning|Manager|SuperAdmin')
                                 @if ($outage->status == "Pending" || $outage->status == "Dispatch Received")
                                     <a href="{{ route('outages.edit', $outage) }}" class="btn btn-sm btn-warning">Edit</a>
                                 @endif
@@ -100,7 +100,7 @@
                             <div class="form-group row">
                                 {!! Form::label('relayed_by', 'Relayed by:', ['class' => 'control-label col-sm-3']) !!}
                                 <div class="col-sm-9">
-                                    <h6>{!! Form::label('relayed_by', $outage->relayed_byx()->name . ' - '. $outage->created_at, ['class'=>'control-label
+                                    <h6>{!! Form::label('relayed_by', $outage->relayed_by . ' - '. $outage->created_at, ['class'=>'control-label
                                         col-md-12
                                         col-xs-12'])
                                         !!}
@@ -187,28 +187,28 @@
                             <textarea name="remarks" id="" cols="30" rows="4" class="form-control"></textarea>
 
                             @if ($outage->status == "Pending")
-                                @role('Dispatch')
+                                @role('Dispatch|Manager|SuperAdmin')
                                     <Button type="submit" name="acknowledge" class="btn btn-sm btn-dark mt-1">Acknowledge</Button>
                                 @endrole
 
-                                @role('Planning')
+                                @role('Planning|Manager|SuperAdmin')
                                     <Button type="submit" name="approve" class="btn btn-sm btn-dark mt-1">Approve</Button>
                                     <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
                                 @endrole
                             @endif
 
                             @if ($outage->status == "Dispatch Received")
-                                @role('Planning')
+                                @role('Planning|Manager|SuperAdmin')
                                     <Button type="submit" name="approve" class="btn btn-sm btn-dark mt-1">Approve</Button>
                                     <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
                                 @endrole
-                                @role('Dispatch')
+                                @role('Dispatch|Manager|SuperAdmin')
                                     <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
                                 @endrole
                             @endif
 
                             @if ($outage->status == "Planning Approved")
-                                @role('Planning')
+                                @role('Planning|Manager|SuperAdmin')
                                     <Button type="submit" name="done" class="btn btn-sm btn-dark mt-1">Done</Button>
                                     <Button type="submit" name="comment" class="btn btn-sm btn-info mt-1">Post Comment</Button>
                                 @endrole
