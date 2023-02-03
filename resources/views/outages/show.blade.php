@@ -76,7 +76,7 @@
                             <div class="form-group row">
                                 {!! Form::label('from', 'From:', ['class' => 'control-label col-sm-3']) !!}
                                 <div class="col-sm-9">
-                                    <h6>{!! Form::label('from', $outage->from, ['class'=>'control-label
+                                    <h6>{!! Form::label('from', \Carbon\Carbon::parse($outage->from)->format('d-m-Y H:i:s'), ['class'=>'control-label
                                         col-md-12
                                         col-xs-12'])
                                         !!}
@@ -88,7 +88,7 @@
                             <div class="form-group row">
                                 {!! Form::label('to', 'To:', ['class' => 'control-label col-sm-3']) !!}
                                 <div class="col-sm-9">
-                                    <h6>{!! Form::label('to', $outage->to, ['class'=>'control-label
+                                    <h6>{!! Form::label('to', \Carbon\Carbon::parse($outage->to)->format('d-m-Y H:i:s'), ['class'=>'control-label
                                         col-md-12
                                         col-xs-12'])
                                         !!}
@@ -100,7 +100,7 @@
                             <div class="form-group row">
                                 {!! Form::label('relayed_by', 'Relayed by:', ['class' => 'control-label col-sm-3']) !!}
                                 <div class="col-sm-9">
-                                    <h6>{!! Form::label('relayed_by', $outage->relayed_by . ' - '. $outage->created_at, ['class'=>'control-label
+                                    <h6>{!! Form::label('relayed_by', $outage->relayed_by, ['class'=>'control-label
                                         col-md-12
                                         col-xs-12'])
                                         !!}
@@ -119,7 +119,7 @@
                                             !!}
                                         </h6>
                                     @else
-                                        <h6>{!! Form::label('received_date', $outage->received_byx()->name . ' - '. $outage->created_at, ['class'=>'control-label
+                                        <h6>{!! Form::label('received_date', $outage->received_byx()->name . ' - '. \Carbon\Carbon::parse($outage->created_at)->format('d-m-Y H:i:s'), ['class'=>'control-label
                                             col-md-12
                                             col-xs-12'])
                                             !!}
@@ -139,7 +139,7 @@
                                             !!}
                                         </h6>
                                     @else
-                                        <h6>{!! Form::label('approved_date', $outage->approved_byx()->name . ' - '. $outage->approval_date, ['class'=>'control-label
+                                        <h6>{!! Form::label('approved_date', $outage->approved_byx()->name . ' - '. \Carbon\Carbon::parse($outage->approval_date)->format('d-m-Y H:i:s'), ['class'=>'control-label
                                             col-md-12
                                             col-xs-12'])
                                             !!}
@@ -169,7 +169,7 @@
                         <h6>All Remarks</h6>
                         <hr>
                         @foreach ($outage->remarksx as $remark)
-                            <label for="remark">{{ $remark->remarks }} - <small>{{ $remark->created_at }}</small></label> <br>
+                            <label for="remark">{{ $remark->remarks }} - <small>{{ \Carbon\Carbon::parse($remark->created_at)->format('d-m-Y H:i:s') }}</small></label> <br>
                         @endforeach
                     </div>
                 </div>

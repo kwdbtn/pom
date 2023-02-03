@@ -40,11 +40,11 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $outage->protection->name }}</td>
-                                <td>{{ $outage->from }}</td>
-                                <td>{{ $outage->to }}</td>
+                                <td>{{ \Carbon\Carbon::parse($outage->from)->format('d-m-Y H:i:s') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($outage->to)->format('d-m-Y H:i:s') }}</td>
                                 <td>{{ $outage->relayed_by }}</td>
-                                <td>{{ $outage->received_byx() == "-" ? "-" : $outage->received_byx()->name . ' - '. $outage->created_at }}</td>
-                                <td>{{ $outage->approved_byx() == "-" ? "-" : $outage->approved_byx()->name . ' - '. $outage->approval_date}}</td>
+                                <td>{{ $outage->received_byx() == "-" ? "-" : $outage->received_byx()->name . ' - '. \Carbon\Carbon::parse($outage->created_at)->format('d-m-Y H:i:s') }}</td>
+                                <td>{{ $outage->approved_byx() == "-" ? "-" : $outage->approved_byx()->name . ' - '. \Carbon\Carbon::parse($outage->approval_date)->format('d-m-Y H:i:s') }}</td>
                                 <td>{{ $outage->status }}</td>
                                 <td>{{ $outage->remarks }}</td>
                                 <td>

@@ -13,13 +13,13 @@ class OutageController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $outages = Outage::orderBy("created_at", "desc")->get();
+        $outages = Outage::where('status', '<>', 'Done')->orderBy("created_at", "desc")->get();
         return view('outages.index', compact('outages'));
     }
 
     public function outages($status) {
         $outages = Outage::where('status', $status)->orderBy("created_at", "desc")->get();
-        $stat = $status == 'Pending' ? 'Pending' : 'Completed';
+        $stat    = $status == 'Pending' ? 'Pending' : 'Completed';
         return view('outages.status', compact('outages', 'stat'));
     }
 
@@ -40,16 +40,16 @@ class OutageController extends Controller {
      */
     public function store(Request $request) {
         $outage = Outage::create([
-            'type' => $request->type,
-            'applicant' => $request->applicant,
+            'type'          => $request->type,
+            'applicant'     => $request->applicant,
             'protection_id' => $request->protection_id,
-            'work' => $request->work,
-            'from' => date('Y-m-d H:i:s', strtotime($request->from)),
-            'to' => date('Y-m-d H:i:s', strtotime($request->to)),
-            'relayed_by' => $request->relayed_by,
+            'work'          => $request->work,
+            'from'          => date('Y-m-d H:i:s', strtotime($request->from)),
+            'to'            => date('Y-m-d H:i:s', strtotime($request->to)),
+            'relayed_by'    => $request->relayed_by,
             'received_date' => now(),
-            'remarks' => $request->remarks,
-            'status' => 'Pending',
+            'remarks'       => $request->remarks,
+            'status'        => 'Pending',
         ]);
 
         $outage->equipment()->sync($request->input('equipment'));
@@ -93,10 +93,10 @@ class OutageController extends Controller {
 
         if ($request->has('acknowledge')) {
             $outage->update([
-                'received_by' => auth()->user()->id,
+                'received_by'   => auth()->user()->id,
                 'received_date' => now(),
-                'remarks' => $request->remarks,
-                'status' => "Dispatch Received",
+                'remarks'       => $request->remarks,
+                'status'        => "Dispatch Received",
             ]);
 
             $outage->remarksx()->create([
@@ -104,10 +104,10 @@ class OutageController extends Controller {
             ]);
         } else if ($request->has('approve')) {
             $outage->update([
-                'approved_by' => auth()->user()->id,
+                'approved_by'   => auth()->user()->id,
                 'approval_date' => now(),
-                'remarks' => $request->remarks,
-                'status' => "Planning Approved",
+                'remarks'       => $request->remarks,
+                'status'        => "Planning Approved",
             ]);
 
             $outage->remarksx()->create([
@@ -124,7 +124,7 @@ class OutageController extends Controller {
         } else if ($request->has('done')) {
             $outage->update([
                 'remarks' => $request->remarks,
-                'status' => "Done",
+                'status'  => "Done",
             ]);
 
             $outage->remarksx()->create([
@@ -143,16 +143,16 @@ class OutageController extends Controller {
      */
     public function update(Request $request, Outage $outage) {
         $outage->update([
-            'type' => $request->type,
-            'applicant' => $request->applicant,
+            'type'          => $request->type,
+            'applicant'     => $request->applicant,
             'protection_id' => $request->protection_id,
-            'work' => $request->work,
-            'from' => date('Y-m-d H:i:s', strtotime($request->from)),
-            'to' => date('Y-m-d H:i:s', strtotime($request->to)),
-            'relayed_by' => auth()->user()->id,
+            'work'          => $request->work,
+            'from'          => date('Y-m-d H:i:s', strtotime($request->from)),
+            'to'            => date('Y-m-d H:i:s', strtotime($request->to)),
+            'relayed_by'    => auth()->user()->id,
             'received_date' => now(),
-            'remarks' => $request->remarks,
-            'status' => 'Pending',
+            'remarks'       => $request->remarks,
+            'status'        => 'Pending',
         ]);
 
         $outage->equipment()->sync($request->input('equipment'));
